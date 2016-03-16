@@ -10,6 +10,8 @@
 header('Content-type: text/html;charset=UTF-8');
 define("BASE_PATH", __DIR__);
 define("LANG", "zh_CN");
+
+
 //define("LANG", "en_GB");
 //define("LANG", "th_TH");
 require_once '/libs/common/Translate.php';
@@ -17,4 +19,6 @@ require_once '/libs/common/Translate.php';
 echo __("hello world!");
 echo "<br/>";
 echo __("{name},hello","*",["name"=>"richard"]);
+
+echo "branch1";
 
