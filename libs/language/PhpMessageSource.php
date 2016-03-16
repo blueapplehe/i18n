@@ -14,13 +14,25 @@ class PhpMessageSource extends MessageSource
 		$this->basePath = rtrim(BASE_PATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "locale" . DIRECTORY_SEPARATOR;
 	}
 
+	
+	/**
+	 * 加载翻译数组
+	 * @param type $category
+	 * @param type $language
+	 * @return type
+	 */
 	protected function loadMessages($category, $language)
 	{
 		$messageFile = $this->getMessageFilePath($category, $language);
 		$messages = $this->loadMessagesFromFile($messageFile);
 		return (array) $messages;
 	}
-
+	
+    /**
+	 * 扫描语言目录下所有翻译文件
+	 * @param type $dir
+	 * @return string
+	 */
 	function scan_all($dir)
 	{
 		$temp = scandir($dir);
@@ -46,6 +58,12 @@ class PhpMessageSource extends MessageSource
 		return $files;
 	}
 
+	/**
+	 * 获取要加载的文件
+	 * @param type $category
+	 * @param type $language
+	 * @return string
+	 */
 	protected function getMessageFilePath($category, $language)
 	{
 		$messageFile = $this->basePath . $language . DIRECTORY_SEPARATOR;
@@ -70,7 +88,12 @@ class PhpMessageSource extends MessageSource
 		}
 		return $messageFile;
 	}
-
+    
+	/**
+	 * 从文件中读取翻译数组
+	 * @param type $messageFile
+	 * @return null|array
+	 */
 	protected function loadMessagesFromFile($messageFile)
 	{
 		if (is_array($messageFile)) {
