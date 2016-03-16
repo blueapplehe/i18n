@@ -20,5 +20,5 @@ echo __("hello world!");
 echo "<br/>";
 echo __("{name},hello","*",["name"=>"richard"]);
 
-echo "branch1";
+echo "branch2";
 
