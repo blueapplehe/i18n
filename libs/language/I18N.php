@@ -12,12 +12,16 @@ class I18N
 	public function __construct()
 	{
 		if (defined("LANG")) {
-			$this->setLanguage(LANG);
+			$this->setLanguage(LANG);//初始化时直接读宏的定义
 		} else {
 			$this->setLanguage("zh_CN");
 		}
 	}
 
+	/**
+	 * 设置要翻译的目标语言
+	 * @param type $language
+	 */
 	public function setLanguage($language)
 	{
 		$this->language = $language;
@@ -38,9 +42,7 @@ class I18N
 		}
 		$messageSource = $this->getMessageSource($category);
 		$translation = $messageSource->translate($category, $message, $language);
-
 		return $this->format($translation, $params, $language);
-		return $translation;
 	}
     
 	/**

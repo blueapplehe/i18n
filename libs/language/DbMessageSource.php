@@ -21,10 +21,10 @@ class DbMessageSource extends MessageSource
 
     public function init()
     {
-        $this->db = Instance::ensure($this->db, Connection::className());
-        if ($this->enableCaching) {
-            $this->cache = Instance::ensure($this->cache, Cache::className());
-        }
+//        $this->db = Instance::ensure($this->db, Connection::className());
+//        if ($this->enableCaching) {
+//            $this->cache = Instance::ensure($this->cache, Cache::className());
+//        }
     }
 	
 	/**
@@ -35,22 +35,22 @@ class DbMessageSource extends MessageSource
 	 */
     protected function loadMessages($category, $language)
     {
-        if ($this->enableCaching) {
-            $key = [
-                __CLASS__,
-                $category,
-                $language,
-            ];
-            $messages = $this->cache->get($key);
-            if ($messages === false) {
-                $messages = $this->loadMessagesFromDb($category, $language);
-                $this->cache->set($key, $messages, $this->cachingDuration);
-            }
-
-            return $messages;
-        } else {
-            return $this->loadMessagesFromDb($category, $language);
-        }
+//        if ($this->enableCaching) {
+//            $key = [
+//                __CLASS__,
+//                $category,
+//                $language,
+//            ];
+//            $messages = $this->cache->get($key);
+//            if ($messages === false) {
+//                $messages = $this->loadMessagesFromDb($category, $language);
+//                $this->cache->set($key, $messages, $this->cachingDuration);
+//            }
+//
+//            return $messages;
+//        } else {
+//            return $this->loadMessagesFromDb($category, $language);
+//        }
     }
 
 	/**
@@ -61,26 +61,26 @@ class DbMessageSource extends MessageSource
 	 */
     protected function loadMessagesFromDb($category, $language)
     {
-        $mainQuery = new Query();
-        $mainQuery->select(['t1.message message', 't2.translation translation'])
-            ->from(["$this->sourceMessageTable t1", "$this->messageTable t2"])
-            ->where('t1.id = t2.id AND t1.category = :category AND t2.language = :language')
-            ->params([':category' => $category, ':language' => $language]);
-
-        $fallbackLanguage = substr($language, 0, 2);
-        if ($fallbackLanguage != $language) {
-            $fallbackQuery = new Query();
-            $fallbackQuery->select(['t1.message message', 't2.translation translation'])
-                ->from(["$this->sourceMessageTable t1", "$this->messageTable t2"])
-                ->where('t1.id = t2.id AND t1.category = :category AND t2.language = :fallbackLanguage')
-                ->andWhere("t2.id NOT IN (SELECT id FROM $this->messageTable WHERE language = :language)")
-                ->params([':category' => $category, ':language' => $language, ':fallbackLanguage' => $fallbackLanguage]);
-
-            $mainQuery->union($fallbackQuery, true);
-        }
-
-        $messages = $mainQuery->createCommand($this->db)->queryAll();
-
-        return ArrayHelper::map($messages, 'message', 'translation');
+//        $mainQuery = new Query();
+//        $mainQuery->select(['t1.message message', 't2.translation translation'])
+//            ->from(["$this->sourceMessageTable t1", "$this->messageTable t2"])
+//            ->where('t1.id = t2.id AND t1.category = :category AND t2.language = :language')
+//            ->params([':category' => $category, ':language' => $language]);
+//
+//        $fallbackLanguage = substr($language, 0, 2);
+//        if ($fallbackLanguage != $language) {
+//            $fallbackQuery = new Query();
+//            $fallbackQuery->select(['t1.message message', 't2.translation translation'])
+//                ->from(["$this->sourceMessageTable t1", "$this->messageTable t2"])
+//                ->where('t1.id = t2.id AND t1.category = :category AND t2.language = :fallbackLanguage')
+//                ->andWhere("t2.id NOT IN (SELECT id FROM $this->messageTable WHERE language = :language)")
+//                ->params([':category' => $category, ':language' => $language, ':fallbackLanguage' => $fallbackLanguage]);
+//
+//            $mainQuery->union($fallbackQuery, true);
+//        }
+//
+//        $messages = $mainQuery->createCommand($this->db)->queryAll();
+//
+//        return ArrayHelper::map($messages, 'message', 'translation');
     }
 }
