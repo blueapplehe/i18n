@@ -5,6 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 header('Content-type: text/html;charset=UTF-8');
 define("BASE_PATH", __DIR__);
 define("LANG", "zh_CN");
