@@ -19,5 +19,7 @@ require_once '/libs/common/Translate.php';
 echo __("hello world!");
 echo "<br/>";
 echo __("{name},hello","*",["name"=>"richard"]);
+echo "<br/>";
+echo "richard";
 
 
