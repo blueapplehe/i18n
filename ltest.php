@@ -20,9 +20,4 @@ echo __("hello world!");
 echo "<br/>";
 echo __("{name},hello","*",["name"=>"richard"]);
 
-<<<<<<< HEAD
-
-=======
-echo "branch2";
->>>>>>> 1f032ad82dee01fdf6433a5cb92352ab9ef265e4
 
