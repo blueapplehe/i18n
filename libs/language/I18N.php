@@ -79,7 +79,8 @@ class I18N
 			if ($source instanceof MessageSource) {
 				return $source;
 			} else {
-				die("error messagesource");
+				$err="source is not a messagesource";
+				throw new Exception($err);
 			}
 		} else {
 			$source = new PhpMessageSource();

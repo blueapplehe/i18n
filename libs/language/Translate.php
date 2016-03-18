@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once '/../language/I18N.php';
+require_once 'I18N.php';
 /**
  * 全局翻译方法
  * @param type $message

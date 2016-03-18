@@ -52,7 +52,8 @@ class PhpMessageSource extends MessageSource
 						$files[] = rtrim($dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $v;
 					}
 				} else {
-					die("file error");
+					$err = "file error";
+					throw new Exception($err);
 				}
 			}
 		}
