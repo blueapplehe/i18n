@@ -47,7 +47,8 @@ class PhpMessageSource extends MessageSource
 					$arr = $this->scan_all($cur_dir);
 					$files = array_merge($files, $arr);
 				} else if (is_file($cur_dir)) {
-					if (end(explode('.', $cur_dir)) == "php") {
+					$cur_arr=explode('.', $cur_dir);
+					if (end($cur_arr) == "php") {
 						$files[] = rtrim($dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $v;
 					}
 				} else {
@@ -88,7 +89,7 @@ class PhpMessageSource extends MessageSource
 		}
 		return $messageFile;
 	}
-    
+
 	/**
 	 * 从文件中读取翻译数组
 	 * @param type $messageFile
